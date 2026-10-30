@@ -16,7 +16,7 @@ From this directory: `python3 -m http.server 8087 --bind 127.0.0.1`, then visit 
 
 Dedicated repository: https://github.com/USinani/synthetic-al-site. Intended primary branch: main; launch work: codex/launch-2026-10-30. GitHub Actions packages an explicit allowlist of website files into `_site`, then deploys to GitHub Pages. README, operational docs, Git metadata and workflow sources are excluded from the website artifact. No runtime secrets or paid services are needed.
 
-Expected staging address: https://usinani.github.io/synthetic-al-site/ (unverified until provider deployment completes). Intended production: https://synthetic.al/; www should redirect to the apex after configuration. Do not confuse these intended URLs with verified deployment.
+Verified staging address before custom-domain attachment: https://usinani.github.io/synthetic-al-site/. Deployed website commit: 7ea3a7f722cfe7a78d1b0b45ce6cbc7ae534dba8; successful Actions run: 41066786616. After custom-domain attachment this address redirects toward synthetic.al, so there is no independent staging environment. Production https://synthetic.al/ and its certificate remain pending owner DNS edits and verification; do not report production live yet.
 
 GitHub Pages does not honor netlify.toml headers. A compatible CSP is supplied via HTML meta; CSP frame-ancestors and HTTP X-Frame-Options, Permissions-Policy, Referrer-Policy and X-Content-Type-Options are not application-controlled on Pages. No third-party scripts, fonts or analytics are used. A complete security-header review needs a host/proxy with configurable headers.
 

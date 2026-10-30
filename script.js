@@ -65,29 +65,4 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
   }
   if($('year'))$('year').textContent=String(new Date().getFullYear());
-  const form=$('contact-form');
-  const status=$('form-status');
-  if(status && (location.protocol==='file:' || ['localhost','127.0.0.1'].includes(location.hostname))){status.textContent='Preview mode — inquiry submission becomes available after the site is configured and deployed on Netlify.';}
-  if(form){
-    form.addEventListener('submit',async event=>{
-      // Only Netlify-hosted forms are handled here. On an unconfigured host,
-      // do not silently pretend an inquiry was successfully collected.
-      event.preventDefault();
-      const status=$('form-status');
-      if(!form.reportValidity())return;
-      if(location.protocol==='file:'||['localhost','127.0.0.1'].includes(location.hostname)){
-        status.dataset.kind='error';status.textContent='This is a local preview. Publish the site to Netlify and enable Forms before taking real inquiries.';return;
-      }
-      const submit=form.querySelector('[type="submit"]');submit.disabled=true;submit.textContent='Sending…';
-      try{
-        const body=new URLSearchParams(new FormData(form));
-        const response=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()});
-        if(!response.ok)throw new Error(`Form returned HTTP ${response.status}`);
-        window.location.assign('/thank-you.html');
-      }catch(err){
-        status.dataset.kind='error';status.textContent='The inquiry could not be confirmed. Please try again, or contact us through a verified channel.';
-        submit.disabled=false;submit.innerHTML='Send inquiry <span aria-hidden="true">↗</span>';
-      }
-    });
-  }
 })();
